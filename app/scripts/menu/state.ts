@@ -8,9 +8,9 @@ namespace Menu {
     }
     
     update() {
-      if (this.input.activePointer.isDown) {
+      // if (this.input.activePointer.isDown) {
         this.game.state.start('Main');
-      }      
+      // }      
     }
   }
 }
