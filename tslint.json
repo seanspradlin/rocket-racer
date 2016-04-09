@@ -38,7 +38,6 @@
     ],
     "quotemark": [true, "single"],
     "radix": true,
-    "semicolon": true,
     "triple-equals": [true, "allow-null-check"],
     "variable-name": false,
     "whitespace": [true,
