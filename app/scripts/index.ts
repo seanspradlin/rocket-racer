@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 'use strict';
-class Bernie extends Phaser.Game {
+class RocketRacer extends Phaser.Game {
   constructor() {
     super(320, 568, Phaser.WEBGL, '');
     this.state.add('Boot', Boot.State);
@@ -12,4 +12,4 @@ class Bernie extends Phaser.Game {
   }
 }
 
-new Bernie();
+new RocketRacer();
