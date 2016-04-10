@@ -17,6 +17,7 @@ namespace Main {
       this.state.add.existing(this);
       this.state.physics.enable(this);
       this.body.gravity.y = 400;
+      this.body.setSize(32, 64);
       this.leftKey = this.state.input.keyboard.addKey(Phaser.KeyCode.A);
       this.rightKey = this.state.input.keyboard.addKey(Phaser.KeyCode.D);
       this.anchor.set(0.5);
