@@ -18,7 +18,9 @@ namespace Main {
     }
     
     update() {
-      this.state.physics.arcade.collide(this.state.player, this);
+      this.state.physics.arcade.collide(this.state.player, this, function(p: Player) {
+        p.isGrounded = true;
+      });
     }
   }
 }

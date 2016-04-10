@@ -16,7 +16,7 @@ namespace Main {
     }
     
     render(): void {
-      
+      this.game.debug.text('Fuel: ' + this.player.fuel, 32, 32);
     }
   }
 }

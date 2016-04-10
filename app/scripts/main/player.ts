@@ -7,6 +7,9 @@ namespace Main {
     leftKey: Phaser.Key;
     rightKey: Phaser.Key;
     isIdle: boolean;
+    isGrounded: boolean;
+    fuel: number;
+    maxFuel: number;
     
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'player/idle/1');
@@ -17,6 +20,9 @@ namespace Main {
       this.leftKey = this.state.input.keyboard.addKey(Phaser.KeyCode.A);
       this.rightKey = this.state.input.keyboard.addKey(Phaser.KeyCode.D);
       this.anchor.set(0.5);
+      this.maxFuel = 200;
+      this.fuel = this.maxFuel;
+      this.isGrounded = true;
       
       // Animations
       this.animations.add('idle', ['player/idle/1', 'player/idle/2'], 30, true, false);
@@ -33,7 +39,9 @@ namespace Main {
         this.angle--;
       }
       this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
+      this.fuel -= 1;
       this.isIdle = false;
+      this.isGrounded = false;
     }
     
     rightThrust(): void {
@@ -42,13 +50,17 @@ namespace Main {
         this.angle++;
       }
       this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
+      this.fuel -= 1;
       this.isIdle = false;
+      this.isGrounded = false;
     }
     
     fullThrust(): void {
       this.animations.play('fullThrust');
       this.game.physics.arcade.velocityFromAngle(this.angle - 90, 400, this.body.velocity);
+      this.fuel -= 2;
       this.isIdle = false;
+      this.isGrounded = false;
     }
     
     idle(): void {
@@ -65,16 +77,23 @@ namespace Main {
     }
     
     update(): void {
-      if (this.leftKey.isDown && this.rightKey.isDown) {
+      
+      if (this.leftKey.isDown && this.rightKey.isDown && this.fuel > 0) {
         this.fullThrust();
-      } else if (this.leftKey.isDown) {
+      } else if (this.leftKey.isDown && this.fuel > 0) {
         this.leftThrust();
-      } else if (this.rightKey.isDown) {
+      } else if (this.rightKey.isDown && this.fuel > 0) {
         this.rightThrust();
       } else {
         this.idle();
       }
       
+      if (this.isGrounded && this.fuel < this.maxFuel) {
+        this.fuel += 10;
+        if (this.fuel > this.maxFuel) {
+          this.fuel = this.maxFuel;
+        }
+      }
     }
   }
 }
