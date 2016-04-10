@@ -5,7 +5,7 @@ namespace Main {
   export class State extends Phaser.State {
     player: Player;
     
-    create() {
+    create(): void {
       this.physics.startSystem(Phaser.Physics.ARCADE);
       
       this.player = new Player(this, this.world.width /2, this.world.height /2);
@@ -13,6 +13,10 @@ namespace Main {
       new Platform(this, 60, this.stage.height - 300, 128);
       new Platform(this, 120, this.stage.height - 700, 256);
       console.log('Game Started');
+    }
+    
+    render(): void {
+      
     }
   }
 }
