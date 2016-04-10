@@ -1,5 +1,13 @@
 {"frames": {
 
+"ground":
+{
+	"frame": {"x":199,"y":1,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
 "player/fullThrust/1":
 {
 	"frame": {"x":1,"y":1,"w":64,"h":64},
@@ -77,8 +85,8 @@
 	"version": "1.0",
 	"image": "sprites.png",
 	"format": "RGBA4444",
-	"size": {"w":198,"h":198},
+	"size": {"w":224,"h":198},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:93f64844bf2057b5ecfa898c9b048368:19217a9d8584f8de364a3e2d1d0b14ec:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d3bdb376cb4b46d825cd171d9f032c27:4088c4c670ba372f00f505a6ec5f18aa:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
