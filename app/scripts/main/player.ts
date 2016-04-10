@@ -6,11 +6,13 @@ namespace Main {
     state: State;
     leftKey: Phaser.Key;
     rightKey: Phaser.Key;
+    isIdle: boolean;
     
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'player/idle/1');
       this.state = state;
       this.state.add.existing(this);
+      this.state.physics.enable(this);
       this.leftKey = this.state.input.keyboard.addKey(Phaser.KeyCode.A);
       this.rightKey = this.state.input.keyboard.addKey(Phaser.KeyCode.D);
       this.anchor.set(0.5);
@@ -29,6 +31,8 @@ namespace Main {
       if (this.angle > -45) {
         this.angle--;
       }
+      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
+      this.isIdle = false;
     }
     
     rightThrust(): void {
@@ -36,10 +40,14 @@ namespace Main {
       if (this.angle < 45) {
         this.angle++;
       }
+      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
+      this.isIdle = false;
     }
     
     fullThrust(): void {
       this.animations.play('fullThrust');
+      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 400, this.body.velocity);
+      this.isIdle = false;
     }
     
     idle(): void {
@@ -48,6 +56,10 @@ namespace Main {
         this.angle--;
       } else if (this.angle < 0) {
         this.angle++;
+      }
+      if (!this.isIdle) {
+        this.game.physics.arcade.velocityFromAngle(this.angle - 90, 0, this.body.velocity);
+        this.isIdle = true;
       }
     }
     

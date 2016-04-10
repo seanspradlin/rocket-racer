@@ -6,7 +6,11 @@ namespace Main {
     player: Player;
     
     create() {
-      this.player = new Player(this, 50, 50);
+      this.physics.startSystem(Phaser.Physics.ARCADE);
+      this.physics.arcade.gravity.y = 100;
+      
+      this.player = new Player(this, this.world.width /2, this.world.height /2);
+      
       console.log('Game Started');
     }
   }
