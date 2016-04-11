@@ -9,12 +9,10 @@ namespace Main {
     isFalling: boolean;
     jumpPower: number;
     pointer: Phaser.Pointer;
-    third: number;
 
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'player/idle/1');
       this.state = state;
-      this.third = this.state.world.width / 3;
       this.pointer = this.state.input.activePointer;
       this.state.add.existing(this);
       this.state.physics.enable(this);
@@ -57,13 +55,13 @@ namespace Main {
     }
 
     tiltLeft(): void {
-      if (this.angle > -35) {
+      if (this.angle > -15) {
         this.angle--;
       }
     }
 
     tiltRight(): void {
-      if (this.angle < 35) {
+      if (this.angle < 15) {
         this.angle++;
       }
     }
@@ -78,7 +76,7 @@ namespace Main {
           }
         } else {
           this.animations.play('fullThrust');
-          this.body.velocity.y = -10 * this.jumpPower;
+          this.body.velocity.y = -8 * this.jumpPower;
           this.jumpPower = 0;
           this.isPrimed = false;
           this.isGrounded = false;
@@ -98,24 +96,17 @@ namespace Main {
         this.isFalling = true;
       }
       if (this.pointer.isDown) {
-        if (this.pointer.x < this.third) {
+        if (this.pointer.x < this.state.world.bounds.halfWidth) {
           this.x -= 3;
           this.tiltLeft();
           if (this.isFalling) {
             this.animations.play('leftThrust');
           }
-        } else if (this.pointer.x > this.third * 2) {
+        } else {
           this.x += 3;
           this.tiltRight();
           if (this.isFalling) {
             this.animations.play('rightThrust');
-          }
-        } else {
-          this.recenter();
-          if (this.isFalling) {
-            this.animations.play('idle');
-          } else {
-            this.animations.play('fullThrust');
           }
         }
       } else {
