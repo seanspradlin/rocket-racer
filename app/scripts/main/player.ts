@@ -4,68 +4,50 @@
 namespace Main {
   export class Player extends Phaser.Sprite {
     state: State;
-    isIdle: boolean;
     isGrounded: boolean;
-    fuel: number;
-    maxFuel: number;
+    isPrimed: boolean;
+    isFalling: boolean;
+    jumpPower: number;
     pointer: Phaser.Pointer;
-    thirdWidth: number;
+    third: number;
     
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'player/idle/1');
       this.state = state;
+      this.third = this.state.world.width / 3;
       this.pointer = this.state.input.activePointer;
       this.state.add.existing(this);
       this.state.physics.enable(this);
       this.body.gravity.y = 400;
+      this.checkWorldBounds = true;
+      this.body.collideWorldBounds = true;
       this.body.setSize(32, 64);
       this.anchor.set(0.5);
-      this.maxFuel = 200;
-      this.fuel = this.maxFuel;
       this.isGrounded = true;
-      this.thirdWidth = this.state.world.width / 3;
+      this.isPrimed = false;
+      this.isFalling = false;
+      this.jumpPower = 0;
       
       // Animations
+      this.animations.add('stationary', ['player/stationary'], 0, false, false);
       this.animations.add('idle', ['player/idle/1', 'player/idle/2'], 30, true, false);
       this.animations.add('fullThrust', ['player/fullThrust/1', 'player/fullThrust/2'], 30, true, false);
       this.animations.add('rightThrust', ['player/rightThrust/1', 'player/rightThrust/2'], 30, true, false);
       this.animations.add('leftThrust', ['player/leftThrust/1', 'player/leftThrust/2'], 30, true, false);
-      
-      this.idle();
+      this.animations.play('stationary');
     }
     
-    leftThrust(): void {
-      this.animations.play('leftThrust');
-      if (this.angle > -45) {
-        this.angle--;
+    landed(): void {
+      if (!this.isGrounded) {
+        this.isGrounded = true;
+        this.isFalling = false;
+        this.angle = 0;
+        this.animations.play('stationary');
       }
-      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
-      this.fuel -= 1;
-      this.isIdle = false;
-      this.isGrounded = false;
     }
+   
     
-    rightThrust(): void {
-      this.animations.play('rightThrust');
-      if (this.angle < 45) {
-        this.angle++;
-      }
-      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
-      this.fuel -= 1;
-      this.isIdle = false;
-      this.isGrounded = false;
-    }
-    
-    fullThrust(): void {
-      this.animations.play('fullThrust');
-      this.game.physics.arcade.velocityFromAngle(this.angle - 90, 300, this.body.velocity);
-      this.fuel -= 1;
-      this.isIdle = false;
-      this.isGrounded = false;
-    }
-    
-    idle(): void {
-      this.animations.play('idle');
+    recenter(): void {
       if (this.angle > 5) {
         this.angle -= 5;
       } else if (this.angle < -5) {
@@ -73,33 +55,76 @@ namespace Main {
       } else {
         this.angle = 0;
       }
-      if (!this.isIdle) {
-        this.game.physics.arcade.velocityFromAngle(this.angle - 90, 0, this.body.velocity);
-        this.isIdle = true;
+    }
+    
+    tiltLeft(): void {
+      if (this.angle > -35) {
+        this.angle--;
+      }
+    }
+    
+    tiltRight(): void {
+      if (this.angle < 35) {
+        this.angle++;
       }
     }
     
     update(): void {
-      if (this.fuel > 0) {
-        if (this.pointer.isDown) {
-          if (this.pointer.x < this.thirdWidth) {
-            this.leftThrust();
-          } else if (this.pointer.x > this.thirdWidth * 2) {
-            this.rightThrust();
+      if (this.isGrounded) {
+        if (this.isPrimed) {
+          if (this.pointer.isDown) {
+            this.jumpPower += 2;
+            if (this.jumpPower > 100) {
+              this.jumpPower = 100;
+              this.animations.play('fullThrust');
+            }
           } else {
-            this.fullThrust();
+            this.animations.play('fullThrust');
+            this.body.velocity.y = -10*this.jumpPower;
+            this.jumpPower = 0;
+            this.isPrimed = false;
+            this.isGrounded = false;
           }
         } else {
-          this.idle();
+          if (this.pointer.isDown) {
+            this.animations.play('idle');
+            this.isPrimed = true;
+            this.jumpPower = 10;
+          }
         }
       } else {
-        this.idle();
-      }
-      
-      if (this.isGrounded && this.fuel < this.maxFuel) {
-        this.fuel += 10;
-        if (this.fuel > this.maxFuel) {
-          this.fuel = this.maxFuel;
+        if (this.body.velocity.y > 0 && !this.isFalling) {
+          this.animations.play('idle');
+          this.isFalling = true;
+        }
+        if (this.pointer.isDown) {
+          if (this.pointer.x < this.third) {
+            this.x -= 3;
+            this.tiltLeft();
+            if (this.isFalling) {
+              this.animations.play('leftThrust');
+            }
+          } else if (this.pointer.x > this.third * 2) {
+            this.x += 3;
+            this.tiltRight();
+            if (this.isFalling) {
+              this.animations.play('rightThrust');
+            }
+          } else {
+            this.recenter();
+            if (this.isFalling) {
+              this.animations.play('idle');
+            } else {
+              this.animations.play('fullThrust');
+            }
+          }
+        } else {
+          this.recenter();
+          if (this.isFalling) {
+            this.animations.play('idle');
+          } else {
+            this.animations.play('fullThrust');
+          }
         }
       }
     }
