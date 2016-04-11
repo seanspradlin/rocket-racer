@@ -20,7 +20,6 @@ namespace Main {
       this.state.physics.enable(this);
       this.body.gravity.y = 400;
       this.checkWorldBounds = true;
-      this.body.collideWorldBounds = true;
       this.body.setSize(32, 64);
       this.anchor.set(0.5);
       this.isGrounded = true;
@@ -138,6 +137,7 @@ namespace Main {
       else {
         this.airControls();
       }
+      this.game.world.wrap(this, this.width / 2, false, true, false);
     }
   }
 }
