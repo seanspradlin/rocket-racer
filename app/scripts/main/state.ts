@@ -15,9 +15,11 @@ namespace Main {
       new Platform(this, -32, this.world.bounds.bottom - 24, this.stage.width + 64, 24);
       new Platform(this, 60, this.world.bounds.bottom - 300, 128);
       new Platform(this, 120, this.world.bounds.bottom - 700, 256);
+      new Platform(this, 10, this.world.bounds.bottom - 1450, 128);
+      new Platform(this, 150, this.world.bounds.bottom - 1700, 128);
       
       this.camera.follow(this.player);
-      this.camera.deadzone = new Phaser.Rectangle(0, 168, 640, 800);
+      this.camera.deadzone = new Phaser.Rectangle(0, 668, 640, 300);
       console.log('Game Started');
     }
     
