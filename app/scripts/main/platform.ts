@@ -11,7 +11,9 @@ namespace Main {
     constructor(options: IPlatformOptions) {
       super(options.state.game, options.x, options.y, options.width, 24, 'sprites', options.key);
       this.state = options.state;
-      this.isMoving = options.isMoving;
+      this.isMoving = options.isMoving || false;
+      this.direction = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
+      this.speed = options.speed || 2;
       this.state.physics.enable(this);
       this.body.checkCollision.up = true;
       this.body.checkCollision.left = false;
@@ -30,7 +32,7 @@ namespace Main {
     update(): void {
       if (this.isMoving) {
         if (this.direction === Phaser.LEFT) {
-          if (this.left < 50) {
+          if (this.left < 10) {
             this.direction = Phaser.RIGHT;
             this.x += this.speed;
           } else {
@@ -38,7 +40,7 @@ namespace Main {
           }
         }
         else {
-          if (this.right > this.game.stage.width - 50) {
+          if (this.right > this.game.world.width - 10) {
             this.direction = Phaser.LEFT;
             this.x -= this.speed;
           } else {
