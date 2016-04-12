@@ -88,8 +88,9 @@ namespace Main {
     }
 
     update(): void {
-      this.physics.arcade.collide(this.player, this.platforms, (p: Player) => {
+      this.physics.arcade.collide(this.player, this.platforms, (p: Player, pl: Platform) => {
         p.landed();
+        pl.isHoldingPlayer = true;
       });
     }
 

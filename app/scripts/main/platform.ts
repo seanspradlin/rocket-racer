@@ -7,12 +7,14 @@ namespace Main {
     isMoving: boolean;
     direction: number;
     speed: number;
+    isHoldingPlayer: boolean;
     
     constructor(options: IPlatformOptions) {
       super(options.state.game, options.x, options.y, options.width, 24, 'sprites', options.key);
       this.state = options.state;
       this.isMoving = options.isMoving || false;
       this.direction = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
+      this.isHoldingPlayer = false;
       this.speed = options.speed || 2;
       this.state.physics.enable(this);
       this.body.checkCollision.up = true;
@@ -35,19 +37,32 @@ namespace Main {
           if (this.left < 10) {
             this.direction = Phaser.RIGHT;
             this.x += this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x += this.speed;
+            }
           } else {
             this.x -= this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x -= this.speed;
+            }
           }
         }
         else {
           if (this.right > this.game.world.width - 10) {
             this.direction = Phaser.LEFT;
             this.x -= this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x -= this.speed;
+            }
           } else {
             this.x += this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x += this.speed;
+            }
           }
         }
       }
+      this.isHoldingPlayer = false;
     }
     
   }
