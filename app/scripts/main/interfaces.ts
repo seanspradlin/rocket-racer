@@ -9,6 +9,7 @@ namespace Main {
     y: number;
     width: number;
     isMoving: boolean;
-    speed: number;
+    speed?: number;
+    surfaceType: PlatformSurfaceType;
   }
 }
