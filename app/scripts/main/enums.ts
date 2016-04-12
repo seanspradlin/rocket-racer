@@ -2,14 +2,14 @@
 'use strict';
 
 namespace Main {
-  export enum PlatformSurfaceTypes {
+  export enum PlatformSurfaceType {
     STATIC,
     CONVEYOR,
     ICY,
     SPRINGY
   }
   
-  export enum PlatformMotionTypes {
+  export enum PlatformMotionType {
     STATIONARY,
     MOVING
   }
