@@ -4,11 +4,14 @@
 namespace Main {
   export class Platform extends Phaser.TileSprite {
     state: State;
+    isMoving: boolean;
+    direction: number;
+    speed: number;
     
-    constructor(state: State, x: number, y: number, width: number, height = 24) {
-      super(state.game, x, y, width, height, 'sprites', 'ground');
-      this.state = state;
-      this.state.add.existing(this);
+    constructor(options: IPlatformOptions) {
+      super(options.state.game, options.x, options.y, options.width, 24, 'sprites', options.key);
+      this.state = options.state;
+      this.isMoving = options.isMoving;
       this.state.physics.enable(this);
       this.body.checkCollision.up = true;
       this.body.checkCollision.left = false;
@@ -16,11 +19,34 @@ namespace Main {
       this.body.checkCollision.down = false;
       this.body.immovable = true;
     }
-    
-    update() {
-      this.state.physics.arcade.collide(this.state.player, this, function(p: Player) {
-        p.landed();
-      });
+  }
+  
+  export class StaticPlatform extends Platform {
+    constructor(options: IPlatformOptions) {
+      options.key = 'ground';
+      super(options);
     }
+    
+    update(): void {
+      if (this.isMoving) {
+        if (this.direction === Phaser.LEFT) {
+          if (this.left < 50) {
+            this.direction = Phaser.RIGHT;
+            this.x += this.speed;
+          } else {
+            this.x -= this.speed;
+          }
+        }
+        else {
+          if (this.right > this.game.stage.width - 50) {
+            this.direction = Phaser.LEFT;
+            this.x -= this.speed;
+          } else {
+            this.x += this.speed;
+          }
+        }
+      }
+    }
+    
   }
 }
