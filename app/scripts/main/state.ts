@@ -51,6 +51,12 @@ namespace Main {
       return group;
     }
     
+    update(): void {
+      this.physics.arcade.collide(this.player, this.platforms, (p: Player) => {
+        p.landed();
+      });
+    }
+    
     render(): void {
       this.game.debug.text('Grounded: ' + this.player.isGrounded, 32, 16);
       this.game.debug.text('Falling: ' + this.player.isFalling, 32, 32);
