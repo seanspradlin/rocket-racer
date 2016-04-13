@@ -25,7 +25,7 @@ namespace Main {
           y: this.world.bounds.bottom - 374,
           width: 256,
           isMoving: true,
-          surfaceType: PlatformSurfaceType.STATIC
+          surfaceType: PlatformSurfaceType.CONVEYOR
         },
         {
           state: this,
@@ -72,10 +72,13 @@ namespace Main {
         switch (platforms[i].surfaceType) {
           case PlatformSurfaceType.STATIC:
             platform = new StaticPlatform(platforms[i]);
+            break;
+          case PlatformSurfaceType.CONVEYOR:
+            platform = new ConveyorPlatform(platforms[i]);
+            break;
         }
         group.add(platform);
       }
-
       return group;
     }
 

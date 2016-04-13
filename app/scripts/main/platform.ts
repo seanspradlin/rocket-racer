@@ -81,4 +81,13 @@ namespace Main {
     }
     
   }
+  
+  export class ConveyorPlatform extends Platform {
+    constructor(options: IPlatformOptions) {
+      options.key = 'conveyor/1';
+      super(options);
+      this.animations.add('move', ['conveyor/1', 'conveyor/2'], 2, true, false);
+      this.animations.play('move');
+    }
+  }
 }
