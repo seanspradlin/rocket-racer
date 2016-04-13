@@ -86,8 +86,24 @@ namespace Main {
     constructor(options: IPlatformOptions) {
       options.key = 'conveyor/1';
       super(options);
-      this.animations.add('move', ['conveyor/1', 'conveyor/2'], 2, true, false);
-      this.animations.play('move');
+      this.animations.add('forward', ['conveyor/1', 'conveyor/2', 'conveyor/3', 'conveyor/4'], this.speed * 6, true, false);
+      this.animations.add('reverse', ['conveyor/4', 'conveyor/3', 'conveyor/2', 'conveyor/1'], this.speed * 6, true, false);
+      if (this.direction === Phaser.LEFT) {
+        this.animations.play('reverse');
+      } else {
+        this.animations.play('forward');
+      }
+    }
+    
+    update(): void {
+      if (this.isHoldingPlayer) {
+        if (this.direction === Phaser.LEFT) {
+          this.state.player.x -= this.speed;
+        } else {
+          this.state.player.x += this.speed;
+        }
+        this.isHoldingPlayer = false;
+      }
     }
   }
 }
