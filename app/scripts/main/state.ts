@@ -21,14 +21,6 @@ namespace Main {
       let options: IPlatformOptions[] = [
         {
           state: this,
-          x: -32,
-          y: this.world.bounds.bottom - 24,
-          width: this.stage.width + 64,
-          isMoving: false,
-          surfaceType: PlatformSurfaceType.STATIC
-        },
-        {
-          state: this,
           x: 75,
           y: this.world.bounds.bottom - 374,
           width: 256,
@@ -63,7 +55,7 @@ namespace Main {
       ];
 
       this.platforms = this.game.add.existing(this.generatePlatforms(options));
-      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 56);
+      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 64);
 
       this.camera.follow(this.player);
       this.camera.deadzone = new Phaser.Rectangle(0, 668, 640, 300);
@@ -74,7 +66,7 @@ namespace Main {
       let group = new Phaser.Group(this.game);
       group.physicsBodyType = Phaser.Physics.ARCADE;
       group.enableBody = true;
-
+      group.add(new Ground(this));
       for (let i = 0; i < platforms.length; i++) {
         let platform: Platform;
         switch (platforms[i].surfaceType) {
