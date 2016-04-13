@@ -3,6 +3,7 @@
 
 namespace Main {
   export enum PlatformSurfaceType {
+    GROUND,
     STATIC,
     CONVEYOR,
     ICY,
