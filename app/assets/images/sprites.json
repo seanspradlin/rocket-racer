@@ -1,12 +1,20 @@
 {"frames": {
 
-"ground":
+"beam":
 {
-	"frame": {"x":199,"y":1,"w":24,"h":24},
+	"frame": {"x":199,"y":1,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"ground":
+{
+	"frame": {"x":199,"y":35,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
 },
 "player/fullThrust/1":
 {
@@ -58,7 +66,7 @@
 },
 "player/rightThrust/1":
 {
-	"frame": {"x":67,"y":133,"w":64,"h":64},
+	"frame": {"x":133,"y":67,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -66,7 +74,7 @@
 },
 "player/rightThrust/2":
 {
-	"frame": {"x":133,"y":67,"w":64,"h":64},
+	"frame": {"x":67,"y":133,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -85,8 +93,8 @@
 	"version": "1.0",
 	"image": "sprites.png",
 	"format": "RGBA4444",
-	"size": {"w":224,"h":198},
+	"size": {"w":232,"h":198},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d3bdb376cb4b46d825cd171d9f032c27:4088c4c670ba372f00f505a6ec5f18aa:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a6c041f88ff2761dc09fe9e178a61687:f8e041d0692d2b5384b3cfc668aa072f:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
