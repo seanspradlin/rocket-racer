@@ -10,7 +10,7 @@ namespace Main {
     isHoldingPlayer: boolean;
     
     constructor(options: IPlatformOptions) {
-      super(options.state.game, options.x, options.y, options.width, 24, 'sprites', options.key);
+      super(options.state.game, options.x, options.y, options.width, 32, 'sprites', options.key);
       this.state = options.state;
       this.isMoving = options.isMoving || false;
       this.direction = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
@@ -25,9 +25,24 @@ namespace Main {
     }
   }
   
+  export class Ground extends Platform {
+    constructor(state: State) {
+      let options: IPlatformOptions = {
+        state: state,
+        x: -32,
+        y: state.world.bounds.bottom - 32,
+        width: state.stage.width + 64,
+        isMoving: false,
+        surfaceType: PlatformSurfaceType.GROUND,
+        key: 'ground'
+      };
+      super(options);
+    }
+  }
+  
   export class StaticPlatform extends Platform {
     constructor(options: IPlatformOptions) {
-      options.key = 'ground';
+      options.key = 'beam';
       super(options);
     }
     
