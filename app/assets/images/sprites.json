@@ -8,9 +8,25 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
-"ground":
+"conveyor/1":
 {
 	"frame": {"x":199,"y":35,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"conveyor/2":
+{
+	"frame": {"x":199,"y":69,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"ground":
+{
+	"frame": {"x":199,"y":103,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -95,6 +111,6 @@
 	"format": "RGBA4444",
 	"size": {"w":232,"h":198},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a6c041f88ff2761dc09fe9e178a61687:f8e041d0692d2b5384b3cfc668aa072f:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:92b57a237e8cbbdc336a903e47c62dcf:e6c4031d06fcd7797d1dbcf784a38ee6:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
