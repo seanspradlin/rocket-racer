@@ -2,6 +2,19 @@
 'use strict';
 
 namespace Main {
+  export interface ILevelOptions {
+    minDistance: number;
+    maxDistance: number;
+    minWidth: number;
+    maxWidth: number;
+    minSpeed: number;
+    maxSpeed: number;
+    staticPlatforms: number;
+    movingStaticPlatforms: number;
+    conveyorPlatforms: number;
+    movingConveyorPlatform: number;
+  }
+  
   export interface IPlatformOptions {
     state: State;
     key?: string;
