@@ -69,7 +69,7 @@ namespace Main {
     private groundControls(): void {
       if (this.isPrimed) {
         if (this.pointer.isDown) {
-          this.jumpPower += 2;
+          this.jumpPower += 1.3;
           if (this.jumpPower > 100) {
             this.jumpPower = 100;
             this.animations.play('fullThrust');
