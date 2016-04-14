@@ -1,4 +1,5 @@
 /// <reference path="phaser.d.ts" />
+/// <reference path="../app/scripts/utilities.ts" />
 /// <reference path="../app/scripts/boot/state.ts" />
 /// <reference path="../app/scripts/gameover/state.ts" />
 /// <reference path="../app/scripts/main/enums.ts" />
