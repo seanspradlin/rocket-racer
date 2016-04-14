@@ -76,13 +76,13 @@ namespace Main {
       
       for (let i = 0; i < options.conveyorPlatforms; i++) {
         let value = values.pop();
-        let platform = this.getPlatformValues(value.distance, value.width, value.speed, false, PlatformSurfaceType.CONVEYOR);
+        let platform = this.getPlatformValues(value.distance, value.width + 2, value.speed, false, PlatformSurfaceType.CONVEYOR);
         platforms.push(platform);
       }
       
       for (let i = 0; i < options.movingStaticPlatforms; i++) {
         let value = values.pop();
-        let platform = this.getPlatformValues(value.distance, value.width, value.speed, true, PlatformSurfaceType.CONVEYOR);
+        let platform = this.getPlatformValues(value.distance, value.width + 2, value.speed, true, PlatformSurfaceType.CONVEYOR);
         platforms.push(platform);
       }
       return platforms;
