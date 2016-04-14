@@ -83,12 +83,15 @@ namespace Main {
   }
   
   export class ConveyorPlatform extends Platform {
+    conveyorDirection: number;
+    
     constructor(options: IPlatformOptions) {
       options.key = 'conveyor/1';
       super(options);
       this.animations.add('forward', ['conveyor/1', 'conveyor/2', 'conveyor/3', 'conveyor/4'], this.speed * 6, true, false);
       this.animations.add('reverse', ['conveyor/4', 'conveyor/3', 'conveyor/2', 'conveyor/1'], this.speed * 6, true, false);
-      if (this.direction === Phaser.LEFT) {
+      this.conveyorDirection = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
+      if (this.conveyorDirection === Phaser.LEFT) {
         this.animations.play('reverse');
       } else {
         this.animations.play('forward');
@@ -97,13 +100,43 @@ namespace Main {
     
     update(): void {
       if (this.isHoldingPlayer) {
-        if (this.direction === Phaser.LEFT) {
+        if (this.conveyorDirection === Phaser.LEFT) {
           this.state.player.x -= this.speed;
         } else {
           this.state.player.x += this.speed;
         }
-        this.isHoldingPlayer = false;
       }
+      if (this.isMoving) {
+        if (this.direction === Phaser.LEFT) {
+          if (this.left < 10) {
+            this.direction = Phaser.RIGHT;
+            this.x += this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x += this.speed;
+            }
+          } else {
+            this.x -= this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x -= this.speed;
+            }
+          }
+        }
+        else {
+          if (this.right > this.game.world.width - 10) {
+            this.direction = Phaser.LEFT;
+            this.x -= this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x -= this.speed;
+            }
+          } else {
+            this.x += this.speed;
+            if (this.isHoldingPlayer) {
+              this.state.player.x += this.speed;
+            }
+          }
+        }
+      }
+      this.isHoldingPlayer = false;
     }
   }
 }
