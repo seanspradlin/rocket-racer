@@ -90,7 +90,7 @@ namespace Main {
     
     private getPlatformValues(height: number, width: number, speed: number, isMoving: boolean, surfaceType: PlatformSurfaceType): IPlatformOptions {
       width *= 32;
-      let hPosition = (Math.random() * (this.world.width - width - 40)) + 40;
+      let hPosition = (Math.random() * (this.stage.width - width - 10)) + 10;
       return {
         state: this,
         x: hPosition,
