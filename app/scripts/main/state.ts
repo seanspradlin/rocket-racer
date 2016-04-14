@@ -56,9 +56,11 @@ namespace Main {
         prev = value.distance;
         values.push(value);
       }
-
+      
       let worldHeight = values[values.length - 1].distance + (options.maxDistance * 2);
       this.world.setBounds(0, 0, this.game.width, worldHeight);
+      
+      values = Utilities.Shuffle(values);
 
       for (let i = 0; i < options.staticPlatforms; i++) {
         let value = values.pop();
