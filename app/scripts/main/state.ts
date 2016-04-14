@@ -128,11 +128,5 @@ namespace Main {
         pl.isHoldingPlayer = true;
       });
     }
-
-    render(): void {
-      this.game.debug.text('Grounded: ' + this.player.isGrounded, 32, 16);
-      this.game.debug.text('Falling: ' + this.player.isFalling, 32, 32);
-      this.game.debug.text('Primed: ' + this.player.isPrimed, 32, 48);
-    }
   }
 }
