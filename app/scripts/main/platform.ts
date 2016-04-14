@@ -31,7 +31,7 @@ namespace Main {
         state: state,
         x: -32,
         y: state.world.bounds.bottom - 32,
-        width: state.stage.width + 64,
+        width: state.game.width + 64,
         isMoving: false,
         surfaceType: PlatformSurfaceType.GROUND,
         key: 'ground'
