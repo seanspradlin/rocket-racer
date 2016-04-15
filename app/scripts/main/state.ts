@@ -31,7 +31,7 @@ namespace Main {
       this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 64);
 
       this.camera.follow(this.player);
-      this.camera.deadzone = new Phaser.Rectangle(0, 668, 640, 300);
+      this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);
       
       this.leftButton = this.add.button(0, this.camera.height - 128, 'ui', null, null, 'left', 'left', 'leftpressed', 'left');
       this.leftButton.fixedToCamera = true;
