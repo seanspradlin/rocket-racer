@@ -10,7 +10,7 @@ namespace Main {
     isHoldingPlayer: boolean;
     
     constructor(options: IPlatformOptions) {
-      super(options.state.game, options.x, options.y, options.width, 32, 'sprites', options.key);
+      super(options.state.game, options.x, options.y, options.width, 32, 'environment', options.key);
       this.state = options.state;
       this.isMoving = options.isMoving || false;
       this.direction = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
