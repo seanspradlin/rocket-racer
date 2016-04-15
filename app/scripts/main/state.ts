@@ -37,6 +37,8 @@ namespace Main {
       this.leftButton.fixedToCamera = true;
       this.rightButton = this.add.button(this.camera.width - 128, this.camera.height - 128, 'ui', null, this, 'right', 'right', 'rightpressed', 'right');
       this.rightButton.fixedToCamera = true;
+      this.jumpButton = this.add.button(128, this.camera.height - 128, 'ui', null, this, 'button', 'button', 'buttonpressed', 'button');
+      this.jumpButton.fixedToCamera = true;
       
       console.log('Game Started');
     }
