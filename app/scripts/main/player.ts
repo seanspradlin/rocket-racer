@@ -5,15 +5,14 @@ namespace Main {
   export class Player extends Phaser.Sprite {
     state: State;
     isGrounded: boolean;
-    isPrimed: boolean;
     isFalling: boolean;
     jumpPower: number;
-    pointer: Phaser.Pointer;
+    playerState: PlayerState;
 
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'idle/1');
       this.state = state;
-      this.pointer = this.state.input.activePointer;
+      // this.pointer = this.state.input.activePointer;
       this.state.add.existing(this);
       this.state.physics.enable(this);
       this.body.gravity.y = 400;
@@ -24,6 +23,7 @@ namespace Main {
       this.isPrimed = false;
       this.isFalling = false;
       this.jumpPower = 0;
+      this.playerState = PlayerState.IDLE;
 
       // Animations
       this.animations.add('stationary', ['stationary'], 0, false, false);
@@ -66,68 +66,59 @@ namespace Main {
       }
     }
 
-    private groundControls(): void {
-      if (this.isPrimed) {
-        if (this.pointer.isDown) {
+    update(): void {
+      switch (this.playerState) {
+        
+        case PlayerState.CHARGING:
+          if (this.jumpPower === 0) {
+            this.jumpPower = 10;
+          }
           this.jumpPower += 1.3;
           if (this.jumpPower > 100) {
             this.jumpPower = 100;
+          }
+          break;
+          
+        case PlayerState.JUMP:
+          if (this.isGrounded) {
             this.animations.play('fullThrust');
+            this.body.velocity.y = -8 * this.jumpPower;
+            this.isGrounded = false;
           }
-        } else {
-          this.animations.play('fullThrust');
-          this.body.velocity.y = -8 * this.jumpPower;
+          this.playerState = PlayerState.IDLE;
           this.jumpPower = 0;
-          this.isPrimed = false;
-          this.isGrounded = false;
-        }
-      } else {
-        if (this.pointer.isDown) {
-          this.animations.play('idle');
-          this.isPrimed = true;
-          this.jumpPower = 10;
-        }
-      }
-    }
-
-    private airControls(): void {
-      if (this.body.velocity.y > 0 && !this.isFalling) {
-        this.animations.play('idle');
-        this.isFalling = true;
-      }
-      if (this.pointer.isDown) {
-        if (this.pointer.x < this.state.world.bounds.halfWidth) {
-          this.x -= 3;
-          this.tiltLeft();
-          if (this.isFalling) {
-            this.animations.play('leftThrust');
+          
+        case PlayerState.LEFT:
+          if (!this.isGrounded) {
+            this.x -= 3;
+            this.tiltLeft();
+            if (this.isFalling) {
+              this.animations.play('leftThrust');
+            }
           }
-        } else {
-          this.x += 3;
-          this.tiltRight();
-          if (this.isFalling) {
-            this.animations.play('rightThrust');
+          break;
+          
+        case PlayerState.RIGHT:
+          if (!this.isGrounded) {
+            this.x += 3;
+            this.tiltRight();
+            if (this.isFalling) {
+              this.animations.play('rightThrust');
+            }
           }
-        }
-      } else {
-        this.recenter();
-        if (this.isFalling) {
-          this.animations.play('idle');
-        } else {
-          this.animations.play('fullThrust');
-        }
+          break;
+          
+          case PlayerState.IDLE:
+            if (this.isFalling) {
+              this.animations.play('idle');
+            } else if (this.isGrounded) {
+              this.animations.play('stationary');
+            } else {
+              this.animations.play('fullThrust');
+            }
+            break;
       }
-    }
-
-
-
-    update(): void {
-      if (this.isGrounded) {
-        this.groundControls();
-      }
-      else {
-        this.airControls();
-      }
+      
       this.game.world.wrap(this, this.width / 2, false, true, false);
     }
   }

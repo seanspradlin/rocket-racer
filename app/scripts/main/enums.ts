@@ -2,6 +2,14 @@
 'use strict';
 
 namespace Main {
+  export enum PlayerState {
+    LEFT,
+    RIGHT,
+    CHARGING,
+    IDLE,
+    JUMP
+  }
+  
   export enum PlatformSurfaceType {
     GROUND,
     STATIC,
