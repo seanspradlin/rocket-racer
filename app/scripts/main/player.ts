@@ -6,13 +6,12 @@ namespace Main {
     state: State;
     isGrounded: boolean;
     isFalling: boolean;
+    isPrimed: boolean;
     jumpPower: number;
-    playerState: PlayerState;
 
     constructor(state: State, x: number, y: number) {
       super(state.game, x, y, 'sprites', 'idle/1');
       this.state = state;
-      // this.pointer = this.state.input.activePointer;
       this.state.add.existing(this);
       this.state.physics.enable(this);
       this.body.gravity.y = 400;
@@ -20,10 +19,9 @@ namespace Main {
       this.body.setSize(32, 64);
       this.anchor.set(0.5);
       this.isGrounded = true;
-      this.isPrimed = false;
       this.isFalling = false;
+      this.isPrimed = false;
       this.jumpPower = 0;
-      this.playerState = PlayerState.IDLE;
 
       // Animations
       this.animations.add('stationary', ['stationary'], 0, false, false);
@@ -67,28 +65,30 @@ namespace Main {
     }
 
     update(): void {
-      switch (this.playerState) {
-        
-        case PlayerState.CHARGING:
-          if (this.jumpPower === 0) {
+      if (this.body.velocity.y > 0 && !this.isFalling) {
+        this.animations.play('idle');
+        this.isFalling = true;
+      }
+      switch (this.state.controls.currentPress) {
+        case ControlButtons.CHARGE:
+          if (this.isPrimed) {
+            this.jumpPower += 1.3;
+            if (this.jumpPower > 100) {
+              this.jumpPower = 100;
+              if (this.isGrounded) {
+                this.animations.play('fullThrust');
+              }
+            } else if (this.isGrounded) {
+              this.animations.play('idle');
+            }
+          } else {
+            this.animations.play('idle');
             this.jumpPower = 10;
-          }
-          this.jumpPower += 1.3;
-          if (this.jumpPower > 100) {
-            this.jumpPower = 100;
+            this.isPrimed = true;
           }
           break;
           
-        case PlayerState.JUMP:
-          if (this.isGrounded) {
-            this.animations.play('fullThrust');
-            this.body.velocity.y = -8 * this.jumpPower;
-            this.isGrounded = false;
-          }
-          this.playerState = PlayerState.IDLE;
-          this.jumpPower = 0;
-          
-        case PlayerState.LEFT:
+        case ControlButtons.LEFT:
           if (!this.isGrounded) {
             this.x -= 3;
             this.tiltLeft();
@@ -98,7 +98,7 @@ namespace Main {
           }
           break;
           
-        case PlayerState.RIGHT:
+        case ControlButtons.RIGHT:
           if (!this.isGrounded) {
             this.x += 3;
             this.tiltRight();
@@ -108,7 +108,16 @@ namespace Main {
           }
           break;
           
-          case PlayerState.IDLE:
+        case ControlButtons.NONE:
+          if (this.isPrimed) {
+            if (this.isGrounded) {
+              this.animations.play('fullThrust');
+              this.body.velocity.y = -8 * this.jumpPower;
+              this.isGrounded = false;
+            }
+            this.isPrimed = false;
+            this.jumpPower = 0;
+          } else {
             if (this.isFalling) {
               this.animations.play('idle');
             } else if (this.isGrounded) {
@@ -116,7 +125,9 @@ namespace Main {
             } else {
               this.animations.play('fullThrust');
             }
-            break;
+          }
+          this.recenter();
+          break; 
       }
       
       this.game.world.wrap(this, this.width / 2, false, true, false);
