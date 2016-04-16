@@ -5,9 +5,7 @@ namespace Main {
   export class State extends Phaser.State {
     player: Player;
     platforms: Phaser.Group;
-    leftButton: Phaser.Button;
-    rightButton: Phaser.Button;
-    jumpButton: Phaser.Button;
+    controls: Controls;
 
     create(): void {
       this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -33,12 +31,7 @@ namespace Main {
       this.camera.follow(this.player);
       this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);
       
-      this.leftButton = this.add.button(0, this.camera.height - 128, 'ui', null, null, 'left', 'left', 'leftpressed', 'left');
-      this.leftButton.fixedToCamera = true;
-      this.rightButton = this.add.button(this.camera.width - 128, this.camera.height - 128, 'ui', null, this, 'right', 'right', 'rightpressed', 'right');
-      this.rightButton.fixedToCamera = true;
-      this.jumpButton = this.add.button(128, this.camera.height - 128, 'ui', null, this, 'button', 'button', 'buttonpressed', 'button');
-      this.jumpButton.fixedToCamera = true;
+      this.controls = new Controls(this);
       
       console.log('Game Started');
     }
