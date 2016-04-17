@@ -26,7 +26,7 @@ namespace Main {
       let options = this.generateLevel(levelOptions);
       let platforms = this.generatePlatforms(options);
       this.platforms = this.game.add.existing(platforms);
-      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 192);
+      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 200);
 
       this.camera.follow(this.player);
       this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);

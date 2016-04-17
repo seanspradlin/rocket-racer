@@ -11,9 +11,9 @@ namespace Main {
     
     constructor(state: State) {
       this.state = state;
-      this.left = this.state.add.sprite(0, this.state.camera.height - 128, 'ui', 'left');
-      this.right = this.state.add.sprite(this.state.camera.width - 128, this.state.camera.height - 128, 'ui', 'right');
-      this.charge = this.state.add.sprite(128, this.state.camera.height - 128, 'ui', 'button');
+      this.left = this.state.add.sprite(0, this.state.camera.height - 136, 'ui', 'left');
+      this.right = this.state.add.sprite(this.state.camera.width - 192, this.state.camera.height - 136, 'ui', 'right');
+      this.charge = this.state.add.sprite(192, this.state.camera.height - 136, 'ui', 'button');
       this.left.name = 'left';
       this.right.name = 'right';
       this.charge.name = 'charge';

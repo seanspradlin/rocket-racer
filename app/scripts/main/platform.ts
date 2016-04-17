@@ -30,7 +30,7 @@ namespace Main {
       let options: IPlatformOptions = {
         state: state,
         x: -32,
-        y: state.world.bounds.bottom - 160,
+        y: state.world.bounds.bottom - 168,
         width: state.game.width + 64,
         isMoving: false,
         surfaceType: PlatformSurfaceType.GROUND,
