@@ -6,6 +6,7 @@ namespace Main {
     player: Player;
     platforms: Phaser.Group;
     controls: Controls;
+    hud: HUD;
 
     create(): void {
       this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -32,6 +33,8 @@ namespace Main {
       this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);
       
       this.controls = new Controls(this);
+      
+      this.hud = new HUD(this);
       
       console.log('Game Started');
     }
