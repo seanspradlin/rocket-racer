@@ -5,6 +5,7 @@
 /// <reference path="../app/scripts/main/enums.ts" />
 /// <reference path="../app/scripts/main/interfaces.ts" />
 /// <reference path="../app/scripts/main/state.ts" />
+/// <reference path="../app/scripts/main/controls.ts" />
 /// <reference path="../app/scripts/main/player.ts" />
 /// <reference path="../app/scripts/main/platform.ts" />
 /// <reference path="../app/scripts/menu/state.ts" />
