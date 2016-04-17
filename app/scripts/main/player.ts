@@ -131,7 +131,7 @@ namespace Main {
       }
       
       this.game.world.wrap(this, this.width / 2, false, true, false);
-      this.state.hud.fill.width = this.jumpPower * 3.04;
+      this.state.hud.fill.width = Math.floor(this.jumpPower * .76) * 4;
     }
   }
 }
