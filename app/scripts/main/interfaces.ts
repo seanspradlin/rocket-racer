@@ -13,6 +13,8 @@ namespace Main {
     movingStaticPlatforms: number;
     conveyorPlatforms: number;
     movingConveyorPlatform: number;
+    lavaSpeed: number;
+    lavaDelay: number;
   }
   
   export interface IPlatformOptions {
