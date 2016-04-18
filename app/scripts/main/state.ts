@@ -7,6 +7,7 @@ namespace Main {
     platforms: Phaser.Group;
     controls: Controls;
     hud: HUD;
+    lava: Lava;
 
     create(): void {
       this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -22,12 +23,15 @@ namespace Main {
         staticPlatforms: 4,
         movingStaticPlatforms: 4,
         conveyorPlatforms: 4,
-        movingConveyorPlatform: 4
+        movingConveyorPlatform: 4,
+        lavaSpeed: 200,
+        lavaDelay: 10
       };
       let options = this.generateLevel(levelOptions);
       let platforms = this.generatePlatforms(options);
       this.platforms = this.game.add.existing(platforms);
       this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 200);
+      this.lava = new Lava(this, levelOptions.lavaDelay, levelOptions.lavaSpeed);
 
       this.camera.follow(this.player);
       this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);
@@ -133,6 +137,10 @@ namespace Main {
       this.physics.arcade.collide(this.player, this.platforms, (p: Player, pl: Platform) => {
         p.landed();
         pl.isHoldingPlayer = true;
+      });
+      this.physics.arcade.overlap(this.player, this.lava, (p: Player, l: Lava) => {
+        console.log('Game over');
+        throw new Error('Not implemented');
       });
     }
   }
