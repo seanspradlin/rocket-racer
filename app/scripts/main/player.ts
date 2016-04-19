@@ -10,7 +10,7 @@ namespace Main {
     jumpPower: number;
 
     constructor(state: State, x: number, y: number) {
-      super(state.game, x, y, 'sprites', 'idle/1');
+      super(state.game, x, y, 'sprites', 'player/idle/1');
       this.state = state;
       this.state.add.existing(this);
       this.state.physics.enable(this);
@@ -24,11 +24,11 @@ namespace Main {
       this.jumpPower = 0;
 
       // Animations
-      this.animations.add('stationary', ['stationary'], 0, false, false);
-      this.animations.add('idle', ['idle/1', 'idle/2'], 30, true, false);
-      this.animations.add('fullThrust', ['fullThrust/1', 'fullThrust/2'], 30, true, false);
-      this.animations.add('rightThrust', ['rightThrust/1', 'rightThrust/2'], 30, true, false);
-      this.animations.add('leftThrust', ['leftThrust/1', 'leftThrust/2'], 30, true, false);
+      this.animations.add('stationary', ['player/stationary'], 0, false, false);
+      this.animations.add('idle', ['player/idle/1', 'player/idle/2'], 30, true, false);
+      this.animations.add('fullThrust', ['player/fullThrust/1', 'player/fullThrust/2'], 30, true, false);
+      this.animations.add('rightThrust', ['player/rightThrust/1', 'player/rightThrust/2'], 30, true, false);
+      this.animations.add('leftThrust', ['player/leftThrust/1', 'player/leftThrust/2'], 30, true, false);
       this.animations.play('stationary');
     }
 
