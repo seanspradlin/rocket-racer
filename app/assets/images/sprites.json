@@ -74,23 +74,23 @@
 },
 "star/1":
 {
-	"frame": {"x":1,"y":199,"w":64,"h":64},
+	"frame": {"x":199,"y":1,"w":50,"h":50},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":7,"w":50,"h":50},
 	"sourceSize": {"w":64,"h":64}
 },
 "star/2":
 {
-	"frame": {"x":67,"y":199,"w":64,"h":64},
+	"frame": {"x":67,"y":199,"w":58,"h":58},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":58,"h":58},
 	"sourceSize": {"w":64,"h":64}
 },
 "star/3":
 {
-	"frame": {"x":133,"y":199,"w":64,"h":64},
+	"frame": {"x":1,"y":199,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -103,6 +103,6 @@
 	"format": "RGBA4444",
 	"size": {"w":256,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:52746dafd22a3ae7789dd7fac5f16efe:48f44bc519a4a750ad7fe2de3adecdb7:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6312350ddc196098b994d80ca79b2cc7:9b0d854c7acb5451bc8d3a8f3cc4d520:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }

@@ -13,7 +13,7 @@ namespace Main {
       this.body.immovable = true;
       this.anchor.set(0.5);
       
-      this.animations.add('default', ['star/1', 'star/2', 'star/3', 'star/2'], 8, true, false);
+      this.animations.add('default', ['star/1', 'star/2', 'star/3', 'star/2'], 12, true, false);
       this.animations.play('default');
     }
   }
