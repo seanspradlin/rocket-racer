@@ -8,6 +8,7 @@ namespace Main {
     controls: Controls;
     hud: HUD;
     lava: Lava;
+    goal: Goal;
 
     create(): void {
       this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -20,10 +21,10 @@ namespace Main {
         maxWidth: 12,
         minSpeed: 1,
         maxSpeed: 4,
-        staticPlatforms: 4,
-        movingStaticPlatforms: 4,
-        conveyorPlatforms: 4,
-        movingConveyorPlatform: 4,
+        staticPlatforms: 1,
+        movingStaticPlatforms: 0,
+        conveyorPlatforms: 0,
+        movingConveyorPlatform: 0,
         lavaSpeed: 200,
         lavaDelay: 10
       };
@@ -69,6 +70,7 @@ namespace Main {
       }
       
       let worldHeight = values[values.length - 1].distance + (options.maxDistance * 2);
+      this.goal = new Goal(this, this.game.width / 2, worldHeight - (options.maxDistance * 1.2));
       this.world.setBounds(0, 0, this.game.width, worldHeight);
       
       values = Utilities.Shuffle(values);
@@ -140,6 +142,9 @@ namespace Main {
       });
       this.physics.arcade.overlap(this.player, this.lava, (p: Player, l: Lava) => {
         console.log('Game over');
+        throw new Error('Not implemented');
+      });
+      this.physics.arcade.collide(this.player, this.goal, () => {
         throw new Error('Not implemented');
       });
     }
