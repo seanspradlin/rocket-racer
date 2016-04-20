@@ -3,14 +3,22 @@
 
 namespace Main {
   export class State extends Phaser.State {
+    lives: number;
+    level: number;
     player: Player;
     platforms: Phaser.Group;
     controls: Controls;
     hud: HUD;
     lava: Lava;
     goal: Goal;
+    
+    init(lives: number, level: number) {
+      this.lives = lives;
+      this.level = level;
+    }
 
     create(): void {
+      this.stage.backgroundColor = 0x88c070;
       this.physics.startSystem(Phaser.Physics.ARCADE);
       this.time.advancedTiming = true;
 
@@ -141,12 +149,19 @@ namespace Main {
         pl.isHoldingPlayer = true;
       });
       this.physics.arcade.overlap(this.player, this.lava, (p: Player, l: Lava) => {
-        console.log('Game over');
-        throw new Error('Not implemented');
+        this.fail();
       });
       this.physics.arcade.collide(this.player, this.goal, () => {
-        throw new Error('Not implemented');
+        this.nextLevel();
       });
+    }
+    
+    nextLevel(): void {
+      this.game.state.start('Stage', true, false, this.lives, ++this.level);
+    }
+    
+    fail(): void {
+      this.game.state.start('Stage', true, false, --this.lives, this.level);
     }
   }
 }

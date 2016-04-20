@@ -9,8 +9,9 @@ namespace Menu {
     
     update() {
       // if (this.input.activePointer.isDown) {
-        this.game.state.start('Main');
-      // }      
+        //this.game.state.start('Main');
+      // }
+      this.game.state.start('Stage', true, false, 3, 0);      
     }
   }
 }
