@@ -7,6 +7,7 @@ class RocketRacer extends Phaser.Game {
     this.state.add('Loader', Loader.State);
     this.state.add('Menu', Menu.State);
     this.state.add('Main', Main.State);
+    this.state.add('Stage', Stage.State);
     this.state.add('GameOver', GameOver.State);
     this.state.start('Boot');
   }
