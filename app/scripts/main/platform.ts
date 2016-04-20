@@ -43,6 +43,7 @@ namespace Main {
   export class StaticPlatform extends Platform {
     constructor(options: IPlatformOptions) {
       options.key = 'beam';
+      options.y -= 168;
       super(options);
     }
     
@@ -87,6 +88,7 @@ namespace Main {
     
     constructor(options: IPlatformOptions) {
       options.key = 'conveyor/1';
+      options.y -= 168;
       super(options);
       this.animations.add('forward', ['conveyor/1', 'conveyor/2', 'conveyor/3', 'conveyor/4'], this.speed * 6, true, false);
       this.animations.add('reverse', ['conveyor/4', 'conveyor/3', 'conveyor/2', 'conveyor/1'], this.speed * 6, true, false);
