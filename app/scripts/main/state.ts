@@ -21,21 +21,9 @@ namespace Main {
       this.stage.backgroundColor = 0x88c070;
       this.physics.startSystem(Phaser.Physics.ARCADE);
       this.time.advancedTiming = true;
-
-      let levelOptions: ILevelOptions = {
-        minDistance: 250,
-        maxDistance: 750,
-        minWidth: 6,
-        maxWidth: 12,
-        minSpeed: 1,
-        maxSpeed: 4,
-        staticPlatforms: 1,
-        movingStaticPlatforms: 0,
-        conveyorPlatforms: 0,
-        movingConveyorPlatform: 0,
-        lavaSpeed: 200,
-        lavaDelay: 10
-      };
+      
+      let levels = this.cache.getJSON('levels');
+      let levelOptions = levels[this.level];
       let options = this.generateLevel(levelOptions);
       let platforms = this.generatePlatforms(options);
       this.platforms = this.game.add.existing(platforms);
@@ -78,7 +66,7 @@ namespace Main {
       }
       
       let worldHeight = values[values.length - 1].distance + (options.maxDistance * 2);
-      this.goal = new Goal(this, this.game.width / 2, worldHeight - (options.maxDistance * 1.2));
+      this.goal = new Goal(this, this.game.width / 2, options.maxDistance);
       this.world.setBounds(0, 0, this.game.width, worldHeight);
       
       values = Utilities.Shuffle(values);
@@ -101,7 +89,7 @@ namespace Main {
         platforms.push(platform);
       }
       
-      for (let i = 0; i < options.movingStaticPlatforms; i++) {
+      for (let i = 0; i < options.movingConveyorPlatform; i++) {
         let value = values.pop();
         let platform = this.getPlatformValues(value.distance, value.width + 2, value.speed, true, PlatformSurfaceType.CONVEYOR);
         platforms.push(platform);
@@ -161,7 +149,12 @@ namespace Main {
     }
     
     fail(): void {
-      this.game.state.start('Stage', true, false, --this.lives, this.level);
+      this.lives--;
+      if (this.lives === 0) {
+        this.lives = 3;
+        this.level = 0;
+      }
+      this.game.state.start('Stage', true, false, this.lives, this.level);
     }
   }
 }
