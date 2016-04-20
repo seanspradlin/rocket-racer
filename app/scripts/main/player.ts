@@ -14,7 +14,7 @@ namespace Main {
       this.state = state;
       this.state.add.existing(this);
       this.state.physics.enable(this);
-      this.body.gravity.y = 400;
+      this.body.gravity.y = 250;
       this.checkWorldBounds = true;
       this.body.setSize(32, 64);
       this.anchor.set(0.5);
@@ -112,7 +112,7 @@ namespace Main {
           if (this.isPrimed) {
             if (this.isGrounded) {
               this.animations.play('fullThrust');
-              this.body.velocity.y = -8 * this.jumpPower;
+              this.body.velocity.y = -200 - (3*this.jumpPower);
               this.isGrounded = false;
             }
             this.isPrimed = false;
