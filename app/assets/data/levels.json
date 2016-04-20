@@ -1,7 +1,7 @@
 [
   {
-    "minDistance": 250,
-    "maxDistance": 400,
+    "minDistance": 150,
+    "maxDistance": 300,
     "minWidth": 6,
     "maxWidth": 12,
     "minSpeed": 1,
@@ -14,8 +14,8 @@
     "lavaDelay": 10
   },
   {
-    "minDistance": 350,
-    "maxDistance": 700,
+    "minDistance": 200,
+    "maxDistance": 450,
     "minWidth": 6,
     "maxWidth": 12,
     "minSpeed": 1,
@@ -28,8 +28,8 @@
     "lavaDelay": 10
   },
   {
-    "minDistance": 250,
-    "maxDistance": 500,
+    "minDistance": 200,
+    "maxDistance": 450,
     "minWidth": 6,
     "maxWidth": 12,
     "minSpeed": 1,
@@ -42,8 +42,8 @@
     "lavaDelay": 10
   },
   {
-    "minDistance": 250,
-    "maxDistance": 750,
+    "minDistance": 200,
+    "maxDistance": 450,
     "minWidth": 6,
     "maxWidth": 12,
     "minSpeed": 1,
@@ -56,8 +56,8 @@
     "lavaDelay": 10
   },
   {
-    "minDistance": 250,
-    "maxDistance": 750,
+    "minDistance": 150,
+    "maxDistance": 300,
     "minWidth": 6,
     "maxWidth": 12,
     "minSpeed": 1,
@@ -70,8 +70,8 @@
     "lavaDelay": 10
   },
   {
-    "minDistance": 250,
-    "maxDistance": 750,
+    "minDistance": 200,
+    "maxDistance": 450,
     "minWidth": 3,
     "maxWidth": 6,
     "minSpeed": 1,
@@ -99,7 +99,7 @@
   },
   {
     "minDistance": 350,
-    "maxDistance": 500,
+    "maxDistance": 450,
     "minWidth": 3,
     "maxWidth": 6,
     "minSpeed": 2,
