@@ -7,8 +7,8 @@ namespace Loader {
       this.load.atlasJSONHash('sprites', 'assets/images/sprites.png', 'assets/images/sprites.json');
       this.load.atlasJSONHash('environment', 'assets/images/environment.png', 'assets/images/environment.json');
       this.load.atlasJSONHash('ui', 'assets/images/ui.png', 'assets/images/ui.json');
-      this.load.bitmapFont('visitor', 'assets/fonts/visitor.png', 'assets/fonts/visitor.fnt');
-      this.load.bitmapFont('visitor-dark', 'assets/fonts/visitor-dark.png', 'assets/fonts/visitor-dark.fnt');
+      this.load.bitmapFont('visitor', 'assets/fonts/visitor.png', 'assets/fonts/visitor.xml');
+      this.load.bitmapFont('visitor-dark', 'assets/fonts/visitor-dark.png', 'assets/fonts/visitor-dark.xml');
       this.load.json('levels', 'assets/data/levels.json');
     }
     
