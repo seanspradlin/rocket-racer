@@ -11,6 +11,7 @@
 /// <reference path="../app/scripts/main/goal.ts" />
 /// <reference path="../app/scripts/main/player.ts" />
 /// <reference path="../app/scripts/main/platform.ts" />
+/// <reference path="../app/scripts/stage/state.ts" />
 /// <reference path="../app/scripts/menu/state.ts" />
 /// <reference path="../app/scripts/loader/state.ts" />
 /// <reference path="../app/scripts/index.ts" />
