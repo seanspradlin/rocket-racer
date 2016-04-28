@@ -1,3 +1,4 @@
+/// <reference path="cordova.d.ts" />
 /// <reference path="phaser.d.ts" />
 /// <reference path="../app/scripts/utilities.ts" />
 /// <reference path="../app/scripts/boot/state.ts" />
