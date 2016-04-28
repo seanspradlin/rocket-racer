@@ -61,6 +61,12 @@ gulp.task('phaser', function () {
     .pipe(gulp.dest(Config.build + 'www/scripts/'));
 });
 
+// Migrate cordova files
+gulp.task('cordova', function () {
+  return gulp.src('./cordova/**/*.*')
+    .pipe(gulp.dest(Config.build));
+});
+
 // Assets
 gulp.task('assets', function () {
   return gulp.src(Config.source + 'assets/**/*.*')
@@ -72,5 +78,5 @@ gulp.task('watch', function() {
   return gulp.watch(Config.source + '**/*.ts', ['ts-crunch']);
 });
 
-gulp.task('default', ['watch', 'ts-crunch', 'html-crunch', 'css-crunch', 'phaser', 'assets']);
-gulp.task('production', ['js-production', 'html-crunch', 'css-production', 'phaser', 'assets']);
+gulp.task('default', ['watch', 'ts-crunch', 'html-crunch', 'css-crunch', 'phaser', 'assets', 'cordova']);
+gulp.task('production', ['js-production', 'html-crunch', 'css-production', 'phaser', 'assets', 'cordova']);
