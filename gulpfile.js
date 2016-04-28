@@ -28,14 +28,14 @@ gulp.task('ts-crunch', function() {
               .pipe(concat('app.min.js'))
               .pipe(uglify())
               .pipe(sourcemaps.write())
-              .pipe(gulp.dest(Config.build + 'scripts'));
+              .pipe(gulp.dest(Config.build + 'www/scripts'));
 });
 
 // Minify HTML
 gulp.task('html-crunch', function () {
   return gulp.src(Config.source + 'index.html')
     .pipe(minifyHtml())
-    .pipe(gulp.dest(Config.build));
+    .pipe(gulp.dest(Config.build + 'www/'));
 });
 
 // Minify CSS
@@ -45,26 +45,26 @@ gulp.task('css-crunch', function() {
     .pipe(concat('style.min.css'))
     .pipe(minifyCss())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(Config.build));
+    .pipe(gulp.dest(Config.build + 'www/'));
 });
 
 gulp.task('css-production', function() {
-  return gulp.src(Config.source + 'style.css')
+  return gulp.src(Config.source + 'www/style.css')
     .pipe(concat('style.min.css'))
     .pipe(minifyCss())
-    .pipe(gulp.dest(Config.build));
+    .pipe(gulp.dest(Config.build + 'www/'));
 });
 
 // Migrate phaser files
 gulp.task('phaser', function () {
   return gulp.src('./node_modules/phaser/dist/phaser.*')
-    .pipe(gulp.dest(Config.build + 'scripts/'));
+    .pipe(gulp.dest(Config.build + 'www/scripts/'));
 });
 
 // Assets
 gulp.task('assets', function () {
   return gulp.src(Config.source + 'assets/**/*.*')
-    .pipe(gulp.dest(Config.build + 'assets/'));
+    .pipe(gulp.dest(Config.build + 'www/assets/'));
 });
 
 // Watch

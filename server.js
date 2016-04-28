@@ -3,7 +3,7 @@ var http = require('http');
 var finalhandler = require('finalhandler');
 var serveStatic = require('serve-static');
 
-var serve = serveStatic(__dirname + '/build/');
+var serve = serveStatic(__dirname + '/build/www/');
 
 var server = http.createServer(function(req, res) {
   var done = finalhandler(req, res);
