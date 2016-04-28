@@ -1,4 +1,4 @@
-/// <reference path="cordova.d.ts" />
+/// <reference path="cordova/cordova.d.ts" />
 /// <reference path="phaser.d.ts" />
 /// <reference path="../app/scripts/rocket-racer.ts" />
 /// <reference path="../app/scripts/utilities.ts" />
