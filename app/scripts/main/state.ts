@@ -11,7 +11,7 @@ namespace Main {
     hud: HUD;
     lava: Lava;
     goal: Goal;
-    
+
     init(lives: number, level: number) {
       this.lives = lives;
       this.level = level;
@@ -21,22 +21,22 @@ namespace Main {
       this.stage.backgroundColor = 0x88c070;
       this.physics.startSystem(Phaser.Physics.ARCADE);
       this.time.advancedTiming = true;
-      
+
       let levels = this.cache.getJSON('levels');
       let levelOptions = levels[this.level];
       let options = this.generateLevel(levelOptions);
       let platforms = this.generatePlatforms(options);
       this.platforms = this.game.add.existing(platforms);
-      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 200);
+      this.player = new Player(this, this.world.width / 2, this.world.bounds.bottom - 100);
       this.lava = new Lava(this, levelOptions.lavaDelay, levelOptions.lavaSpeed);
 
       this.camera.follow(this.player);
-      this.camera.deadzone = new Phaser.Rectangle(0, 368, 640, 500);
-      
+      this.camera.deadzone = new Phaser.Rectangle(0, 184, 320, 250);
+
       this.controls = new Controls(this);
-      
+
       this.hud = new HUD(this);
-      
+
       console.log('Game Started');
     }
 
@@ -64,11 +64,11 @@ namespace Main {
         prev = value.distance;
         values.push(value);
       }
-      
+
       let worldHeight = values[values.length - 1].distance + (options.maxDistance * 2);
       this.goal = new Goal(this, this.game.width / 2, options.maxDistance);
       this.world.setBounds(0, 0, this.game.width, worldHeight);
-      
+
       values = Utilities.Shuffle(values);
 
       for (let i = 0; i < options.staticPlatforms; i++) {
@@ -82,13 +82,13 @@ namespace Main {
         let platform = this.getPlatformValues(value.distance, value.width, value.speed, true, PlatformSurfaceType.STATIC);
         platforms.push(platform);
       }
-      
+
       for (let i = 0; i < options.conveyorPlatforms; i++) {
         let value = values.pop();
         let platform = this.getPlatformValues(value.distance, value.width + 2, value.speed, false, PlatformSurfaceType.CONVEYOR);
         platforms.push(platform);
       }
-      
+
       for (let i = 0; i < options.movingConveyorPlatform; i++) {
         let value = values.pop();
         let platform = this.getPlatformValues(value.distance, value.width + 2, value.speed, true, PlatformSurfaceType.CONVEYOR);
@@ -96,10 +96,10 @@ namespace Main {
       }
       return platforms;
     }
-    
+
     private getPlatformValues(height: number, width: number, speed: number, isMoving: boolean, surfaceType: PlatformSurfaceType): IPlatformOptions {
-      width *= 32;
-      let hPosition = (Math.random() * (this.game.width - width - 10)) + 10;
+      width *= 16;
+      let hPosition = (Math.random() * (this.game.width - width - 5)) + 5;
       return {
         state: this,
         x: hPosition,
@@ -139,15 +139,15 @@ namespace Main {
       this.physics.arcade.overlap(this.player, this.lava, (p: Player, l: Lava) => {
         this.fail();
       });
-      this.physics.arcade.collide(this.player, this.goal, () => {
+      this.physics.arcade.overlap(this.player, this.goal, () => {
         this.nextLevel();
       });
     }
-    
+
     nextLevel(): void {
       this.game.state.start('Stage', true, false, this.lives, ++this.level);
     }
-    
+
     fail(): void {
       this.lives--;
       if (this.lives === 0) {

@@ -14,9 +14,9 @@ namespace Main {
       this.state = state;
       this.state.add.existing(this);
       this.state.physics.enable(this);
-      this.body.gravity.y = 250;
+      this.body.gravity.y = 125;
       this.checkWorldBounds = true;
-      this.body.setSize(32, 64);
+      this.body.setSize(16, 32);
       this.anchor.set(0.5);
       this.isGrounded = true;
       this.isFalling = false;
@@ -87,32 +87,32 @@ namespace Main {
             this.isPrimed = true;
           }
           break;
-          
+
         case ControlButtons.LEFT:
           if (!this.isGrounded) {
-            this.x -= 3;
+            this.x -= 1.5;
             this.tiltLeft();
             if (this.isFalling) {
               this.animations.play('leftThrust');
             }
           }
           break;
-          
+
         case ControlButtons.RIGHT:
           if (!this.isGrounded) {
-            this.x += 3;
+            this.x += 1.5;
             this.tiltRight();
             if (this.isFalling) {
               this.animations.play('rightThrust');
             }
           }
           break;
-          
+
         case ControlButtons.NONE:
           if (this.isPrimed) {
             if (this.isGrounded) {
               this.animations.play('fullThrust');
-              this.body.velocity.y = -200 - (3*this.jumpPower);
+              this.body.velocity.y = -100 - (1.5*this.jumpPower);
               this.isGrounded = false;
             }
             this.isPrimed = false;
@@ -127,11 +127,11 @@ namespace Main {
             }
           }
           this.recenter();
-          break; 
+          break;
       }
-      
+
       this.game.world.wrap(this, this.width / 2, false, true, false);
-      this.state.hud.fill.width = Math.floor(this.jumpPower * .76) * 4;
+      this.state.hud.fill.width = Math.floor(this.jumpPower * .76) * 2;
     }
   }
 }

@@ -8,9 +8,9 @@ namespace Main {
     direction: number;
     speed: number;
     isHoldingPlayer: boolean;
-    
+
     constructor(options: IPlatformOptions) {
-      super(options.state.game, options.x, options.y, options.width, 32, 'environment', options.key);
+      super(options.state.game, options.x, options.y, options.width, 16, 'environment', options.key);
       this.state = options.state;
       this.isMoving = options.isMoving || false;
       this.direction = Phaser.Utils.randomChoice(Phaser.LEFT, Phaser.RIGHT);
@@ -24,14 +24,14 @@ namespace Main {
       this.body.immovable = true;
     }
   }
-  
+
   export class Ground extends Platform {
     constructor(state: State) {
       let options: IPlatformOptions = {
         state: state,
-        x: -32,
-        y: state.world.bounds.bottom - 168,
-        width: state.game.width + 64,
+        x: -16,
+        y: state.world.bounds.bottom - 84,
+        width: state.game.width + 32,
         isMoving: false,
         surfaceType: PlatformSurfaceType.GROUND,
         key: 'ground'
@@ -39,18 +39,18 @@ namespace Main {
       super(options);
     }
   }
-  
+
   export class StaticPlatform extends Platform {
     constructor(options: IPlatformOptions) {
       options.key = 'beam';
-      options.y -= 168;
+      options.y -= 84;
       super(options);
     }
-    
+
     update(): void {
       if (this.isMoving) {
         if (this.direction === Phaser.LEFT) {
-          if (this.left < 10) {
+          if (this.left < 5) {
             this.direction = Phaser.RIGHT;
             this.x += this.speed;
             if (this.isHoldingPlayer) {
@@ -64,7 +64,7 @@ namespace Main {
           }
         }
         else {
-          if (this.right > this.game.world.width - 10) {
+          if (this.right > this.game.world.width - 5) {
             this.direction = Phaser.LEFT;
             this.x -= this.speed;
             if (this.isHoldingPlayer) {
@@ -80,15 +80,15 @@ namespace Main {
       }
       this.isHoldingPlayer = false;
     }
-    
+
   }
-  
+
   export class ConveyorPlatform extends Platform {
     conveyorDirection: number;
-    
+
     constructor(options: IPlatformOptions) {
       options.key = 'conveyor/1';
-      options.y -= 168;
+      options.y -= 84;
       super(options);
       this.animations.add('forward', ['conveyor/1', 'conveyor/2', 'conveyor/3', 'conveyor/4'], this.speed * 6, true, false);
       this.animations.add('reverse', ['conveyor/4', 'conveyor/3', 'conveyor/2', 'conveyor/1'], this.speed * 6, true, false);
@@ -99,7 +99,7 @@ namespace Main {
         this.animations.play('forward');
       }
     }
-    
+
     update(): void {
       if (this.isHoldingPlayer) {
         if (this.conveyorDirection === Phaser.LEFT) {
@@ -110,7 +110,7 @@ namespace Main {
       }
       if (this.isMoving) {
         if (this.direction === Phaser.LEFT) {
-          if (this.left < 10) {
+          if (this.left < 5) {
             this.direction = Phaser.RIGHT;
             this.x += this.speed;
             if (this.isHoldingPlayer) {
@@ -124,7 +124,7 @@ namespace Main {
           }
         }
         else {
-          if (this.right > this.game.world.width - 10) {
+          if (this.right > this.game.world.width - 5) {
             this.direction = Phaser.LEFT;
             this.x -= this.speed;
             if (this.isHoldingPlayer) {
