@@ -8,7 +8,6 @@ namespace Main {
     meter: Phaser.Sprite;
     background: Phaser.TileSprite;
 
-
     constructor(state: State) {
       this.state = state;
       this.background = this.state.add.tileSprite(0, 0, this.state.camera.width, 32, 'ui', 'hudbg');
