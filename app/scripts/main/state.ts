@@ -151,10 +151,10 @@ namespace Main {
     fail(): void {
       this.lives--;
       if (this.lives === 0) {
-        this.lives = 3;
-        this.level = 0;
+        this.game.state.start('GameOver', true, false);
+      } else {
+        this.game.state.start('Stage', true, false, this.lives, this.level);
       }
-      this.game.state.start('Stage', true, false, this.lives, this.level);
     }
   }
 }
