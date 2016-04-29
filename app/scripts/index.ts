@@ -2,7 +2,7 @@
 'use strict';
 class RocketRacer extends Phaser.Game {
   constructor() {
-    super(640, 1136, Phaser.CANVAS, '', null, false, false);
+    super(320, 568, Phaser.CANVAS, '', null, false, false);
     this.state.add('Boot', Boot.State);
     this.state.add('Loader', Loader.State);
     this.state.add('Menu', Menu.State);
