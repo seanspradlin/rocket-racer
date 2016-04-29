@@ -8,12 +8,12 @@ namespace Main {
     right: Phaser.Sprite;
     charge: Phaser.Sprite;
     currentPress: ControlButtons;
-    
+
     constructor(state: State) {
       this.state = state;
-      this.left = this.state.add.sprite(0, this.state.camera.height - 136, 'ui', 'left');
-      this.right = this.state.add.sprite(this.state.camera.width - 192, this.state.camera.height - 136, 'ui', 'right');
-      this.charge = this.state.add.sprite(192, this.state.camera.height - 136, 'ui', 'button');
+      this.left = this.state.add.sprite(0, this.state.camera.height - 68, 'ui', 'left');
+      this.right = this.state.add.sprite(this.state.camera.width - 96, this.state.camera.height - 68, 'ui', 'right');
+      this.charge = this.state.add.sprite(96, this.state.camera.height - 68, 'ui', 'button');
       this.left.name = 'left';
       this.right.name = 'right';
       this.charge.name = 'charge';
@@ -37,42 +37,42 @@ namespace Main {
       this.charge.events.onInputUp.add(this.chargeRelease, this);
       this.currentPress = ControlButtons.NONE;
     }
-    
+
     leftClick(): void {
       this.left.animations.play('pressed');
       this.right.animations.play('unpressed');
       this.charge.animations.play('unpressed');
       this.currentPress = ControlButtons.LEFT;
     }
-    
+
     rightClick(): void {
       this.left.animations.play('unpressed');
       this.right.animations.play('pressed');
       this.charge.animations.play('unpressed');
       this.currentPress = ControlButtons.RIGHT;
     }
-    
+
     chargeClick(): void {
       this.left.animations.play('unpressed');
       this.right.animations.play('unpressed');
       this.charge.animations.play('pressed');
       this.currentPress = ControlButtons.CHARGE;
     }
-    
+
     leftRelease(): void {
       this.left.animations.play('unpressed');
       if (this.currentPress === ControlButtons.LEFT) {
         this.currentPress = ControlButtons.NONE;
       }
     }
-    
+
     rightRelease(): void {
       this.right.animations.play('unpressed');
       if (this.currentPress === ControlButtons.RIGHT) {
         this.currentPress = ControlButtons.NONE;
       }
     }
-    
+
     chargeRelease(): void {
       this.charge.animations.play('unpressed');
       if (this.currentPress === ControlButtons.CHARGE) {
