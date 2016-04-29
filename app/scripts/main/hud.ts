@@ -11,7 +11,6 @@ namespace Main {
 
     constructor(state: State) {
       this.state = state;
-      console.log(this.state.camera.width);
       this.background = this.state.add.tileSprite(0, 0, this.state.camera.width, 32, 'ui', 'hudbg');
       this.background.fixedToCamera = true;
       this.meter = this.state.add.sprite(this.state.camera.width - 158, 2, 'ui', 'meter');
