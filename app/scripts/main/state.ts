@@ -146,7 +146,11 @@ namespace Main {
 
     nextLevel(): void {
       this.sound.play('success');
-      this.game.state.start('Stage', true, false, this.lives, ++this.level);
+      this.level++;
+      if (this.level === 30) {
+        this.level = 0;
+      }
+      this.game.state.start('Stage', true, false, this.lives, this.level);
     }
 
     fail(): void {
