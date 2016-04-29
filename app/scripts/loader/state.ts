@@ -11,6 +11,8 @@ namespace Loader {
       this.load.bitmapFont('visitor-dark', 'assets/fonts/visitor-dark.png', 'assets/fonts/visitor-dark.xml');
       this.load.json('levels', 'assets/data/levels.json');
       this.load.audio('jump', 'assets/audio/jump.ogg');
+      this.load.audio('success', 'assets/audio/success.ogg');
+      this.load.audio('fail', 'assets/audio/fail.ogg');
     }
 
     create() {

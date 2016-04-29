@@ -145,10 +145,12 @@ namespace Main {
     }
 
     nextLevel(): void {
+      this.sound.play('success');
       this.game.state.start('Stage', true, false, this.lives, ++this.level);
     }
 
     fail(): void {
+      this.sound.play('fail');
       this.lives--;
       if (this.lives === 0) {
         this.game.state.start('GameOver', true, false);
