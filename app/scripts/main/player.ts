@@ -114,6 +114,7 @@ namespace Main {
               this.animations.play('fullThrust');
               this.body.velocity.y = -100 - (1.5*this.jumpPower);
               this.isGrounded = false;
+              this.state.sound.play('jump');
             }
             this.isPrimed = false;
             this.jumpPower = 0;

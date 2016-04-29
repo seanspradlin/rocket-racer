@@ -10,8 +10,9 @@ namespace Loader {
       this.load.bitmapFont('visitor', 'assets/fonts/visitor.png', 'assets/fonts/visitor.xml');
       this.load.bitmapFont('visitor-dark', 'assets/fonts/visitor-dark.png', 'assets/fonts/visitor-dark.xml');
       this.load.json('levels', 'assets/data/levels.json');
+      this.load.audio('jump', 'assets/audio/jump.ogg');
     }
-    
+
     create() {
       console.log('Loading complete');
       this.game.state.start('Menu');
