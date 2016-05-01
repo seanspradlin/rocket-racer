@@ -1,16 +1,13 @@
 {
-  "name": "bernie",
-  "version": "0.0.1",
-  "description": "Mobile game made with CacoonJS and Phaser.io",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
+  "name": "rocket-racer",
+  "version": "1.0.0",
+  "description": "A simple platforming game designed for mobile browsers using phaser.io.",
+  "main": "server.js",
   "author": "Sean Spradlin",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seanspradlin/Bernie"
+    "url": "https://github.com/seanspradlin/rocket-racer"
   },
   "devDependencies": {
     "finalhandler": "^0.4.0",
