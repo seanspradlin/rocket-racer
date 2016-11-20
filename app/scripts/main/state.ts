@@ -97,7 +97,8 @@ namespace Main {
       return platforms;
     }
 
-    private getPlatformValues(height: number, width: number, speed: number, isMoving: boolean, surfaceType: PlatformSurfaceType): IPlatformOptions {
+    private getPlatformValues(height: number, width: number, speed: number, 
+                              isMoving: boolean, surfaceType: PlatformSurfaceType): IPlatformOptions {
       width *= 16;
       let hPosition = (Math.random() * (this.game.width - width - 5)) + 5;
       return {
@@ -164,3 +165,4 @@ namespace Main {
     }
   }
 }
+
